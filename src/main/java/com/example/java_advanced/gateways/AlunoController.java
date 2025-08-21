@@ -1,6 +1,10 @@
 package com.example.java_advanced.gateways;
 
 import com.example.java_advanced.gateways.dtos.AlunoPostRequest;
+import com.example.java_advanced.services.ConcatIdToAlunoService;
+import com.example.java_advanced.services.ListAlunosService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,24 +14,22 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/fiap/aluno")
+@RequiredArgsConstructor
 public class AlunoController {
 
+    private final ConcatIdToAlunoService concatIdToAlunoService;
+    private final ListAlunosService listAlunosService;
 
     @GetMapping("/{id}")
     public String getAluno(@PathVariable String id) {
-        return "Aluno ".concat(id);
+        return concatIdToAlunoService.execute(id);
     }
 
     @GetMapping()
     public ResponseEntity<?> getAlunos(
             @RequestParam(name = "sala") String classRoom,
             @RequestParam(required = false, name = "nomeBuscado") String searchedName) {
-        ArrayList<String> alunos = new ArrayList<>();
-
-
-        if (classRoom.equals("2tdspr")) {
-            alunos.add("Aluno 1");
-        }
+        List<String> alunos = listAlunosService.listarAlunos();
 
         if (alunos.isEmpty()) {
             return ResponseEntity.noContent().build();
