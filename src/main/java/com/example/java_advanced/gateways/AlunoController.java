@@ -1,15 +1,16 @@
 package com.example.java_advanced.gateways;
 
-import com.example.java_advanced.gateways.dtos.AlunoPostRequest;
+import com.example.java_advanced.domains.Aluno;
+import com.example.java_advanced.gateways.dtos.AlunoDataRequest;
+import com.example.java_advanced.gateways.dtos.response.AlunoResponseDto;
 import com.example.java_advanced.services.ConcatIdToAlunoService;
+import com.example.java_advanced.services.CreateAlunoService;
 import com.example.java_advanced.services.ListAlunosService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -19,6 +20,7 @@ public class AlunoController {
 
     private final ConcatIdToAlunoService concatIdToAlunoService;
     private final ListAlunosService listAlunosService;
+    private final CreateAlunoService criaAlunoService;
 
     @GetMapping("/{id}")
     public String getAluno(@PathVariable String id) {
@@ -41,9 +43,20 @@ public class AlunoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public String cadastroAluno(@RequestBody AlunoPostRequest aluno) {
+    public AlunoResponseDto cadastroAluno(@RequestBody AlunoDataRequest alunoDto) {
 
-        return "Aluno cadastrado com sucesso: ".concat(aluno.getNomeCompleto());
+        Aluno alunoCriado = criaAlunoService.execute(alunoDto.toAluno());
+        return new AlunoResponseDto(
+                alunoCriado.getNome(),
+                alunoCriado.getSobrenome(),
+                alunoCriado.getMatricula(),
+                alunoCriado.getIdade()
+        );
 
+    }
+
+    @PutMapping
+    public String atualiuzarAluno(@RequestBody AlunoDataRequest aluno) {
+        return "Aluno atualizado com sucesso".concat(aluno.getNomeCompleto());
     }
 }
