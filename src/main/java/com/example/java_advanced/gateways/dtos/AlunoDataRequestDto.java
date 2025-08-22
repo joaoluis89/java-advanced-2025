@@ -4,7 +4,7 @@ import com.example.java_advanced.domains.Aluno;
 import lombok.*;
 
 @Data
-public class AlunoDataRequest {
+public class AlunoDataRequestDto {
 
     private String nomeCompleto;
     private String matricula;
@@ -12,7 +12,7 @@ public class AlunoDataRequest {
 
 
     public Aluno toAluno() {
-        String[] nomes = nomeCompleto.split(" ", 1);
+        String[] nomes = nomeCompleto.split(" ");
         return Aluno.builder()
                 .nome(nomes[0])
                 .sobrenome(nomes[1])
