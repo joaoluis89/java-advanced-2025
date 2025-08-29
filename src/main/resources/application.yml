@@ -2,5 +2,5 @@ spring:
   application:
     name: java-advanced
   profiles:
-    active: ${PROFILE:local2}
+    active: ${PROFILE:local}
 

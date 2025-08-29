@@ -6,6 +6,6 @@ import org.springframework.http.ResponseEntity;
 public interface ProfessorControllerInterface {
 
 
-  ResponseEntity<?> getProfessor(String professorId);
   ResponseEntity<?> postProfessor(ProfessorDto professorDto);
+  ResponseEntity<?> getProfessor(String professorId);
 }
