@@ -4,6 +4,7 @@ import com.example.java_advanced.domains.Aluno;
 import com.example.java_advanced.gateways.dtos.AlunoDataRequestDto;
 import com.example.java_advanced.gateways.dtos.response.AlunoResponseDto;
 import com.example.java_advanced.services.*;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,7 +43,8 @@ public class AlunoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public AlunoResponseDto cadastroAluno(@RequestBody AlunoDataRequestDto alunoDto) {
+    public AlunoResponseDto cadastroAluno(
+            @RequestBody @Valid AlunoDataRequestDto alunoDto) {
 
         Aluno alunoCriado = createAlunoService.execute(alunoDto.toAluno());
         return AlunoResponseDto.fromAluno(alunoCriado);
