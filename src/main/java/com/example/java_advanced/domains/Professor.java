@@ -1,8 +1,8 @@
 package com.example.java_advanced.domains;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,10 +10,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 public class Professor {
 
-  @Id
-  private String id;
-  private String nome;
-
+    @Id
+    private String id;
+    @OneToOne
+    private Pessoa pessoa;
+    @ManyToOne()
+    private Materia materia;
 }

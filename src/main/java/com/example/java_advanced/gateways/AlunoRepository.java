@@ -8,5 +8,5 @@ import java.util.List;
 public interface AlunoRepository extends JpaRepository<Aluno, String> {
 
 
-    List<Aluno> findByIdade(int idade);
+    List<Aluno> findByPessoaIdade(int idade);
 }

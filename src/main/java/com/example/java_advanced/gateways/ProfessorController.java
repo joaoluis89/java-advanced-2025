@@ -20,7 +20,8 @@ public class ProfessorController implements ProfessorControllerInterface {
   @PostMapping
   public ResponseEntity<?> postProfessor(ProfessorDtoImpl professorDto) {
     Professor professor = professorService.save(
-        new Professor(null, professorDto.getName())
+            //TODO add info for teacher
+        Professor.builder().build()
     );
     return ResponseEntity.status(201).body(professor); //DTO de response, não é boa prática devolver o domínio direto
   };

@@ -17,7 +17,6 @@ public class CreateAlunoService implements AlunoDataServiceInterface {
     public Aluno execute(Aluno aluno) {
 
         Aluno alunoSaved = alunoRepository.save(aluno);
-        List<Aluno> alunosByIdade = alunoRepository.findByIdade(36);
 
         return alunoSaved;
     }

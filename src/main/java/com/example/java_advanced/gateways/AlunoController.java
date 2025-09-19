@@ -34,7 +34,9 @@ public class AlunoController {
         List<String> alunos = listAlunosService.listarAlunos();
 
         if (alunos.isEmpty()) {
-            return ResponseEntity.noContent().build();
+            return ResponseEntity
+                    .noContent()
+                    .build();
         } else {
             return ResponseEntity.ok(alunos);
         }

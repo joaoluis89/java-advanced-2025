@@ -10,12 +10,14 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class Aluno {
+public class Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
-    private String matricula;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Pessoa pessoa;
+    private String nome;
+    private String sobrenome;
+    private String documento;
+    private int idade;
+
 }

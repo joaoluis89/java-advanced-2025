@@ -12,10 +12,10 @@ public record AlunoResponseDto (
 
     public static AlunoResponseDto fromAluno(Aluno aluno) {
         return new AlunoResponseDto(
-                aluno.getNome(),
-                aluno.getSobrenome(),
+                aluno.getPessoa().getNome(),
+                aluno.getPessoa().getSobrenome(),
                 aluno.getMatricula(),
-                aluno.getIdade()
+                aluno.getPessoa().getIdade()
         );
     }
 }
