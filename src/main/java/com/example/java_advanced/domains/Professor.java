@@ -17,6 +17,7 @@ public class Professor {
     private String id;
     @OneToOne
     private Pessoa pessoa;
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     private Materia materia;
+
 }

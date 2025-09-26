@@ -15,9 +15,17 @@ import java.util.List;
 public class Materia {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nome;
-    @OneToMany(mappedBy = "materia")
+    @OneToMany(
+            mappedBy = "materia",
+            fetch = FetchType.LAZY
+    )
     private List<Professor> professores;
+    @OneToMany(
+            mappedBy = "materia",
+            fetch = FetchType.LAZY
+    )
+    private List<AlunoMateria>  alunoMaterias;
 }

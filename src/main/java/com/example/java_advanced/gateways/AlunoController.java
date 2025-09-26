@@ -6,6 +6,9 @@ import com.example.java_advanced.gateways.dtos.response.AlunoResponseDto;
 import com.example.java_advanced.services.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,16 +32,20 @@ public class AlunoController {
 
     @GetMapping()
     public ResponseEntity<?> getAlunos(
-            @RequestParam(name = "sala") String classRoom,
-            @RequestParam(required = false, name = "nomeBuscado") String searchedName) {
-        List<String> alunos = listAlunosService.listarAlunos();
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam Sort.Direction direction,
+            @RequestParam(defaultValue = "10") int quantidadeListada
+    ) {
+       Page<Aluno> alunos = listAlunosService.listarAlunos(page, quantidadeListada, direction);
+
+        Page<AlunoResponseDto> list = alunos.map(AlunoResponseDto::fromAluno);
 
         if (alunos.isEmpty()) {
             return ResponseEntity
                     .noContent()
                     .build();
         } else {
-            return ResponseEntity.ok(alunos);
+            return ResponseEntity.ok(list);
         }
 
     }
