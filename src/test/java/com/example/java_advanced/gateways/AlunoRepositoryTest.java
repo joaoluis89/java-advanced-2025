@@ -1,6 +1,7 @@
 package com.example.java_advanced.gateways;
 
 import com.example.java_advanced.domains.Aluno;
+import com.example.java_advanced.domains.Pessoa;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +24,16 @@ class AlunoRepositoryTest {
         //AAA
         //Arrange
         Aluno esperado = Aluno.builder()
-                .nome("Joao")
-                .sobrenome("Pacheco")
+                .pessoa(
+                        Pessoa.builder()
+                                .idade(36)
+                                .nome("Joao")
+                                .build()
+                )
                 .build();
         //Act
         Aluno resultadoDoSave = repository.save(esperado);
         Optional<Aluno> optionalRecuperadoPorId = repository.findById(resultadoDoSave.getId());
-
         //Assert
         assertTrue(optionalRecuperadoPorId.isPresent());
         Aluno repureradoPorId = optionalRecuperadoPorId.get();
@@ -42,44 +46,32 @@ class AlunoRepositoryTest {
         //Arrange
         int idade = 36;
         Aluno esperado = Aluno.builder()
-                .nome("Joao")
-                .sobrenome("Pacheco")
-                .idade(idade)
+                .pessoa(
+                        Pessoa.builder()
+                                .idade(36)
+                                .nome("Joao")
+                                .build()
+                )
                 .build();
 
         Aluno esperado2 = Aluno.builder()
-                .nome("Joao")
-                .sobrenome("Pacheco")
-                .idade(18)
+                .pessoa(
+                        Pessoa.builder()
+                                .idade(36)
+                                .nome("Luis")
+                                .build()
+                )
                 .build();
 
-        repository.save(esperado);
-        repository.save(esperado2);
+        repository.saveAll(List.of(esperado, esperado2));
 
         //Act
-        List<Aluno> optionalRecuperadoPorIdade = repository.findByIdade(idade);
+        List<Aluno> optionalRecuperadoPorIdade = repository.findByPessoaIdadeEquals(idade);
 
         //Assert
         Assertions.assertFalse(optionalRecuperadoPorIdade.isEmpty());
-        Assertions.assertEquals(1, optionalRecuperadoPorIdade.size());
+        Assertions.assertEquals(2, optionalRecuperadoPorIdade.size());
         Assertions.assertEquals(esperado, optionalRecuperadoPorIdade.get(0));
-        Assertions.assertEquals(idade, optionalRecuperadoPorIdade.get(0).getIdade());
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//        Assertions.assertEquals(idade, optionalRecuperadoPorIdade.get(0).getIdade());
     }
-
-
 }

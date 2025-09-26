@@ -26,8 +26,9 @@ public class AlunoController {
     private final AlunoDataServiceInterface updateAlunoService;
 
     @GetMapping("/{id}")
-    public String getAluno(@PathVariable String id) {
-        return concatIdToAlunoService.execute(id);
+        public String getAluno(@PathVariable String id) {
+            String execute = concatIdToAlunoService.execute(id);
+        return execute.concat("1");
     }
 
     @GetMapping()

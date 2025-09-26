@@ -34,54 +34,15 @@ class AlunoControllerTest {
     @Test
     void getAlunoTest() {
         //Arrange
-        String expected = "a-string";
-        String parametro = "sdfghjklhgfdsgh";
+        String expected = "a-string-abacaxi";
+        String parametro = "";
         Mockito.when(concatIdToAlunoService.execute(parametro)).thenReturn(expected);
         //Act
-        String actual = alunoController.getAluno(parametro);
-
-        Aluno expectedAluno = Aluno.builder()
-                .nome("Joao")
-                .build();
-        Aluno actualAluno = Aluno.builder()
-                .nome("Joao")
-                .build();
-
-
-        Mockito.when(listAlunosService.listarAlunos(page, quantidadeListada)).thenReturn(List.of());
-
-        ResponseEntity<?> object = alunoController.getAlunos();
-
-
-
-
-
-
-
-
-
-
-
-
-
+        String actual = alunoController.getAluno("");
 
         //Assert
-        assertEquals(expected, actual);
-
-        assertEquals(expectedAluno, actualAluno);
-
+        assertEquals(expected.concat("1"), actual);
         Mockito.verify(concatIdToAlunoService,
                 Mockito.times(1)).execute(Mockito.anyString());
-
-
-
-
-
-
-
-
-
-
     }
-
 }

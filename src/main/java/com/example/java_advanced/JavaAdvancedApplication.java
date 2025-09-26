@@ -26,31 +26,31 @@ public class JavaAdvancedApplication {
         SpringApplication.run(JavaAdvancedApplication.class, args);
     }
 
-    @EventListener(value = ApplicationReadyEvent.class)
-    public void setupAlunos() {
-        LocalDate now = LocalDate.now();
-        List<Materia> materias = new ArrayList<>();
-        for (int i = 0; i <= 10; i++) {
-            Materia build = Materia.builder()
-                    .nome("Materia " + i)
-                    .build();
-            Materia saved = materiaRepository.save(build);
-            materias.add(saved);
-        }
-        for (int i = 0; i <= 200; i++) {
-            if (i % 10 == 0) {
-                now = now.plusDays(1);
-            }
-            Aluno alunoASerCadastrado = Aluno.builder()
-                    .pessoa(Pessoa.builder()
-                            .nome("Aluno ")
-                            .sobrenome("" + i)
-                            .idade(i)
-                            .build())
-                    .build();
-            alunoRepository.save(alunoASerCadastrado);
-        }
-
-    }
+//    @EventListener(value = ApplicationReadyEvent.class)
+//    public void setupAlunos() {
+//        LocalDate now = LocalDate.now();
+//        List<Materia> materias = new ArrayList<>();
+//        for (int i = 0; i <= 10; i++) {
+//            Materia build = Materia.builder()
+//                    .nome("Materia " + i)
+//                    .build();
+//            Materia saved = materiaRepository.save(build);
+//            materias.add(saved);
+//        }
+//        for (int i = 0; i <= 200; i++) {
+//            if (i % 10 == 0) {
+//                now = now.plusDays(1);
+//            }
+//            Aluno alunoASerCadastrado = Aluno.builder()
+//                    .pessoa(Pessoa.builder()
+//                            .nome("Aluno ")
+//                            .sobrenome("" + i)
+//                            .idade(i)
+//                            .build())
+//                    .build();
+//            alunoRepository.save(alunoASerCadastrado);
+//        }
+//
+//    }
 
 }
