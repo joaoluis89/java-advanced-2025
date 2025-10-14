@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,7 +36,8 @@ public class AlunoController {
     public ResponseEntity<?> getAlunos(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam Sort.Direction direction,
-            @RequestParam(defaultValue = "10") int quantidadeListada
+            @RequestParam(defaultValue = "10") int quantidadeListada,
+            Authentication authentication
     ) {
        Page<Aluno> alunos = listAlunosService.listarAlunos(page, quantidadeListada, direction);
 

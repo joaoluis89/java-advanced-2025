@@ -3,8 +3,10 @@ package com.example.java_advanced;
 import com.example.java_advanced.domains.Aluno;
 import com.example.java_advanced.domains.Materia;
 import com.example.java_advanced.domains.Pessoa;
+import com.example.java_advanced.domains.Usuario;
 import com.example.java_advanced.gateways.AlunoRepository;
 import com.example.java_advanced.gateways.MateriaRepository;
+import com.example.java_advanced.gateways.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,13 +23,22 @@ public class JavaAdvancedApplication {
 
     private final AlunoRepository alunoRepository;
     private final MateriaRepository materiaRepository;
+    private final UsuarioRepository usuarioRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(JavaAdvancedApplication.class, args);
     }
 
-//    @EventListener(value = ApplicationReadyEvent.class)
-//    public void setupAlunos() {
+    @EventListener(value = ApplicationReadyEvent.class)
+    public void setupAlunos() {
+
+        usuarioRepository.save(
+                Usuario.builder()
+                        .username("admin")
+                        .password("{noop}admin")
+                        .build()
+        );
+
 //        LocalDate now = LocalDate.now();
 //        List<Materia> materias = new ArrayList<>();
 //        for (int i = 0; i <= 10; i++) {
@@ -50,7 +61,7 @@ public class JavaAdvancedApplication {
 //                    .build();
 //            alunoRepository.save(alunoASerCadastrado);
 //        }
-//
-//    }
+
+    }
 
 }
