@@ -6,13 +6,11 @@ import com.example.java_advanced.gateways.dtos.ProfessorDtoImpl;
 import com.example.java_advanced.services.ProfessorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/fiap/professor")
 public class ProfessorController implements ProfessorControllerInterface {
 
   private final ProfessorService professorService;
@@ -28,7 +26,7 @@ public class ProfessorController implements ProfessorControllerInterface {
 
   @GetMapping("/{professorId}")
   public ResponseEntity<?> getProfessor(@PathVariable String professorId) {
-    return null;
+    return ResponseEntity.ok("professor");
   };
 
 
